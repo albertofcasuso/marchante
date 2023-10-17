@@ -1,7 +1,15 @@
-
+import { HomeModel } from "./HomeModel";
 import "./Home.scss";
 
 const Home = () => {
+  const {
+    register,
+    handleSubmit,
+    onSubmitRegister,
+    onSubmitLogin,
+    handleSubmitLogin,
+    registerLogin,
+  } = HomeModel();
   return (
     <>
       <section className="container my-5">
@@ -45,7 +53,7 @@ const Home = () => {
                     className="selectpicker1 form-control"
                     data-live-search="true"
                     id="suggestions-mercados"
-                  // onChange="setMarketToFind('mercado')"
+                    // onChange="setMarketToFind('mercado')"
                   >
                     <option value="">CP...</option>
                   </select>
@@ -90,7 +98,7 @@ const Home = () => {
                     className="selectpicker2 form-control"
                     data-live-search="true"
                     id="suggestions-tianguis"
-                  //onChange="setMarketToFind('tianguis')"
+                    //onChange="setMarketToFind('tianguis')"
                   >
                     <option value="">CP...</option>
                   </select>
@@ -122,169 +130,193 @@ const Home = () => {
             className="col-md-5 border-left border-right border-secondary"
             id="registro"
           >
-            <h4 className="mb-4 titulo">Regístrate</h4>
-            <hr />
+            <form onSubmit={handleSubmit(onSubmitRegister)}>
+              <h4 className="mb-4 titulo">Regístrate</h4>
+              <hr />
 
-            <div className="form-group">
-              <label htmlFor="tipoCliente">Selecciona tu tipo</label>
-              <select
-                className="form-control"
-                id="tipoCliente"
-              // onBlur="checkType()"
-              // onChange="checkType()"
-              >
-                <option>Locatario</option>
-                <option>Cliente</option>
-              </select>
-            </div>
-
-            <div id="disapearCustommer">
               <div className="form-group">
-                <label htmlFor="mercadoTianguis">Tu mercado o tianguis</label>
+                <label htmlFor="tipoCliente">Selecciona tu tipo</label>
                 <select
                   className="form-control"
-                  id="mercadoTianguis"
-                // onblur="checkData()"
-                //onChange={verifyTypeMarket()}
+                  id="tipoCliente"
+                  // onBlur="checkType()"
+                  // onChange="checkType()"
+                  {...register("tipoCliente")}
                 >
-                  <option>Mercado</option>
-                  <option>Tianguis</option>
-                </select>
-                <label htmlFor="zonaRegistro">Selecciona tu zona</label>
-                <select
-                  className="form-control"
-                  id="zonaRegistro"
-                // onblur="checkData()"
-                >
-                  <option>CDMX Centro</option>
-                  <option>CDMX Norte</option>
-                  <option>CDMX Oriente</option>
-                  <option>CDMX Poninete</option>
-                  <option>CDMX Sur</option>
+                  <option>Locatario</option>
+                  <option>Cliente</option>
                 </select>
               </div>
+
+              <div id="disapearCustommer">
+                <div className="form-group">
+                  <label htmlFor="mercadoTianguis">Tu mercado o tianguis</label>
+                  <select
+                    className="form-control"
+                    id="mercadoTianguis"
+                    {...register("mercadoTianguis")}
+                    // onblur="checkData()"
+                    //onChange={verifyTypeMarket()}
+                  >
+                    <option>Mercado</option>
+                    <option>Tianguis</option>
+                  </select>
+                  <label htmlFor="zonaRegistro">Selecciona tu zona</label>
+                  <select
+                    className="form-control"
+                    id="zonaRegistro"
+                    {...register("zonaRegistro")}
+                    // onblur="checkData()"
+                  >
+                    <option>CDMX Centro</option>
+                    <option>CDMX Norte</option>
+                    <option>CDMX Oriente</option>
+                    <option>CDMX Poninete</option>
+                    <option>CDMX Sur</option>
+                  </select>
+                </div>
+                <div className="form-group">
+                  <label htmlFor="mercado">Selecciona tu mercado</label>
+                  <select
+                    className="form-control"
+                    id="mercado"
+                    data-live-search="true"
+                    {...register("mercado")}
+                    // onblur="checkData()"
+                  ></select>
+                  <label htmlFor="local">Escribe el número de tu local</label>
+                  <input
+                    type="number"
+                    className="form-control"
+                    id="local"
+                    {...register("local")}
+                    // onblur="checkData()"
+                  />
+                </div>
+              </div>
+
               <div className="form-group">
-                <label htmlFor="mercado">Selecciona tu mercado</label>
-                <select
-                  className="form-control"
-                  id="mercado"
-                  data-live-search="true"
-                // onblur="checkData()"
-                ></select>
-                <label htmlFor="local">Escribe el número de tu local</label>
+                <label htmlFor="formGroupExampleInput" id="label--name">
+                  Escribe el nombre de tu local
+                </label>
                 <input
-                  type="number"
+                  type="text"
                   className="form-control"
-                  id="local"
-                // onblur="checkData()"
+                  id="name"
+                  placeholder="Nombre"
+                  {...register("nombreLocal")}
+                  // onblur="checkData()"
                 />
               </div>
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="formGroupExampleInput" id="label--name">
-                Escribe el nombre de tu local
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                id="name"
-                placeholder="Nombre"
-              // onblur="checkData()"
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="exampleInputEmail1">Escribe tu correo</label>
-              <input
-                type="email"
-                className="form-control"
-                id="email"
-                aria-describedby="emailHelp"
-                placeholder="micorreo@correo.com"
-              //onBlur="checkData()"
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="exampleInputPassword1">Escribe tu contraseña</label>
-              <input
-                type="password"
-                className="form-control"
-                id="password"
-                placeholder="*****"
-              // onblur="checkPass()"
-              />
-            </div>
-            <div className="form-group form-check text-black-50 small">
-              <input type="checkbox" className="form-check-input" id="check" />
-              <label className="form-check-label" htmlFor="exampleCheck1">
-                Acepto Términos y Condiciones
-              </label>
-            </div>
-            <button
-              // onclick="register()"
-              className="btn btn-primary"
-              id="submit"
-              disabled
-            >
-              Registrarme
-            </button>
+              <div className="form-group">
+                <label htmlFor="exampleInputEmail1">Escribe tu correo</label>
+                <input
+                  type="email"
+                  className="form-control"
+                  id="email"
+                  aria-describedby="emailHelp"
+                  placeholder="micorreo@correo.com"
+                  {...register("email")}
+                  //onBlur="checkData()"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="exampleInputPassword1">
+                  Escribe tu contraseña
+                </label>
+                <input
+                  type="password"
+                  className="form-control"
+                  id="password"
+                  placeholder="*****"
+                  // onblur="checkPass()"
+                  {...register("password")}
+                />
+              </div>
+              <div className="form-group form-check text-black-50 small">
+                <input
+                  type="checkbox"
+                  className="form-check-input"
+                  id="check"
+                  {...register("termsAndConditions", { required: true })}
+                />
+                <label className="form-check-label" htmlFor="exampleCheck1">
+                  Acepto Términos y Condiciones
+                </label>
+              </div>
+              <button
+                // onclick="register()"
+                type="submit"
+                className="btn btn-primary"
+                id="submit"
+              >
+                Registrarme
+              </button>
+            </form>
           </article>
 
           <article
             className="col-md-5 border-left border-right border-secondary"
             id="login"
           >
-            <h4 className="mb-4 mt-5 mt-md-0 titulo">Inicia Sesión</h4>
-            <hr />
-            <div className="form-group">
-              <label htmlFor="exampleInputEmail1">Escribe tu correo</label>
-              <input
-                type="email"
-                className="form-control"
-                id="loginEmail"
-                aria-describedby="emailHelp"
-                placeholder="micorreo@correo.com"
-              // onblur="checkDataLogin()"
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="exampleInputPassword1">Escribe tu contraseña</label>
-              <input
-                type="password"
-                className="form-control"
-                id="loginPassword"
-                placeholder="*****"
-              // onblur="checkDataLogin()"
-              />
-            </div>
-            <div className="form-group form-check">
-              <input
-                type="checkbox"
-                className="form-check-input"
-                id="checkLogin"
-              />
-              <label className="form-check-label" htmlFor="exampleCheck1">
-                Recordar correo
-              </label>
-              <p>
-                <a
-                  className="small"
-                  data-toggle="modal"
-                  data-target="#forgot-password"
-                  style={{ color: "dodgerblue", cursor: "pointer" }}
-                >
-                  Olvide mi contraseña
-                </a>
-              </p>
-            </div>
-            <button
-              className="btn btn-primary"
-              id="submitLogin"
-              disabled
-            // onclick="login(false)"
-            >
-              Iniciar Sesión
-            </button>
+            <form onSubmit={handleSubmitLogin(onSubmitLogin)}>
+              <h4 className="mb-4 mt-5 mt-md-0 titulo">Inicia Sesión</h4>
+              <hr />
+              <div className="form-group">
+                <label htmlFor="exampleInputEmail1">Escribe tu correo</label>
+                <input
+                  type="email"
+                  className="form-control"
+                  id="loginEmail"
+                  aria-describedby="emailHelp"
+                  placeholder="micorreo@correo.com"
+                  {...registerLogin("correo")}
+                  // onblur="checkDataLogin()"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="exampleInputPassword1">
+                  Escribe tu contraseña
+                </label>
+                <input
+                  type="password"
+                  className="form-control"
+                  id="loginPassword"
+                  placeholder="*****"
+                  {...registerLogin("password")}
+                  // onblur="checkDataLogin()"
+                />
+              </div>
+              <div className="form-group form-check">
+                <input
+                  type="checkbox"
+                  className="form-check-input"
+                  id="checkLogin"
+                  {...registerLogin("remember")}
+                />
+                <label className="form-check-label" htmlFor="exampleCheck1">
+                  Recordar correo
+                </label>
+                <p>
+                  <a
+                    className="small"
+                    data-toggle="modal"
+                    data-target="#forgot-password"
+                    style={{ color: "dodgerblue", cursor: "pointer" }}
+                  >
+                    Olvide mi contraseña
+                  </a>
+                </p>
+              </div>
+              <button
+                className="btn btn-primary"
+                id="submitLogin"
+                type="submit"
+                // onclick="login(false)"
+              >
+                Iniciar Sesión
+              </button>
+            </form>
           </article>
         </div>
       </section>
